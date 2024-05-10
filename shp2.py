@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsView, QGraphicsPolygonItem, QPushButton, QVBoxLayout, QWidget, QFileDialog
 from PyQt5.QtCore import Qt, QPointF
 from PyQt5.QtGui import QColor, QPolygonF, QBrush
-import shapefile
 
+import shapefile
 
 class ShapefileViewer(QMainWindow):
     def __init__(self):
@@ -14,7 +14,10 @@ class ShapefileViewer(QMainWindow):
 
         self.scene = QGraphicsScene()
         self.view = QGraphicsView(self.scene)
-        self.view.scale(0.001,0.001)
+        
+        # Set gradient background color
+        self.setStyleSheet("background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5, stop: 0 rgba(255, 255, 255, 255), stop: 1 rgba(255, 255, 255, 255));")
+        self.setWindowOpacity(0.97)
         self.setCentralWidget(self.view)
 
         self.import_button = QPushButton("Import File")
@@ -23,7 +26,6 @@ class ShapefileViewer(QMainWindow):
         layout = QVBoxLayout()
         layout.addWidget(self.import_button)
         layout.addWidget(self.view)
-        layout.setAlignment(Qt.AlignTop | Qt.AlignLeft)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
@@ -56,7 +58,6 @@ class ShapefileViewer(QMainWindow):
             self.zoom_factor *= zoom_out_factor
 
         self.view.scale(zoom_in_factor, zoom_in_factor)
-
 
 if __name__ == "__main__":
     import sys
