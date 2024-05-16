@@ -1,2 +1,1 @@
-# Qt
- Gui using the PyQt5 python framework
+Diving into the realms of spatial programming and using PyQt5 for designing GUI
